@@ -6,6 +6,8 @@ This is the NoC routing simulator developed for Shenjing neuromorphic accelerato
 
 The simulator takes messages to transit as input and output cycle-by-cycle instructions of every router.
 
+The interface of simulator is at sg.edu.nus.comp.shenjing_routing.noc.Simulator 
+
 ## Input Format
 * Each line contains a message in the format of src_x,src_y,dst_x,dst_y.
 * For example "1,2,2,3" represents the message from (1,2) to (2,3).
