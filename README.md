@@ -1,5 +1,5 @@
 # Shenjing NoC routing simulator
-This is the NoC routing simulator developed for Shenjing neuromorphic accelerator. It can also be used for general network simulations. It currently supports:
+This is the NoC routing simulator developed for Shenjing neuromorphic accelerator[[1]](#citation). It can also be used for general network simulations. It currently supports:
 1. Mesh network;
 2. Simple XY routing;
 3. User defined buffer size.
@@ -31,3 +31,7 @@ The interface of simulator is at sg.edu.nus.comp.shenjing_routing.noc.Simulator
 ~~~
 $TIME(int),$TYPE(int{0-SEND, 1-BYPASS, 2-RECV}),$SRC_DIR(char{0,N,S,W,E}),$DST_DIR,MSG_ID(int)
 ~~~
+
+## Citation
+> [1] Bo Wang\*, Jun Zhou\*, Weng-Fai Wong and Li-Shiuan Peh, "Shenjing: a low power reconfigurable accelerator for neuromorphic computing with partial-sum and spike networks-on-chip", Design, Automation and Test in Europe Conference, March 2020.  
+*\* Equally contributed*
