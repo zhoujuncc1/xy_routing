@@ -1,4 +1,4 @@
-# Shenjing NoC routing simulator
+# A simple NoC routing simulator
 This is the NoC routing simulator developed for Shenjing neuromorphic accelerator[[1]](#citation). It can also be used for general network simulations. It currently supports:
 1. Mesh network;
 2. Simple XY routing;
