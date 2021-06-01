@@ -18,12 +18,12 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-package sg.edu.nus.comp.shenjing_routing.noc;
+package sg.edu.nus.comp.xy_routing.noc;
 
 import javax.naming.SizeLimitExceededException;
 
-import sg.edu.nus.comp.shenjing_routing.utils.Pair;
-import sg.edu.nus.comp.shenjing_routing.utils.Triple;
+import sg.edu.nus.comp.xy_routing.utils.Pair;
+import sg.edu.nus.comp.xy_routing.utils.Triple;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

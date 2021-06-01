@@ -18,7 +18,7 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-package sg.edu.nus.comp.shenjing_routing.noc;
+package sg.edu.nus.comp.xy_routing.noc;
 
 public class Constants {
 

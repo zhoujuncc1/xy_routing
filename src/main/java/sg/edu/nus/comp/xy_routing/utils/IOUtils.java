@@ -18,7 +18,7 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-package sg.edu.nus.comp.shenjing_routing.utils;
+package sg.edu.nus.comp.xy_routing.utils;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -26,7 +26,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import sg.edu.nus.comp.shenjing_routing.noc.Message;
+import sg.edu.nus.comp.xy_routing.noc.Message;
 
 /**
  * Parse the messages from input files or strings. Each line contains a message

@@ -18,7 +18,7 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-package sg.edu.nus.comp.shenjing_routing.utils;
+package sg.edu.nus.comp.xy_routing.utils;
 
 public class Triple<T>{
     public T x;
