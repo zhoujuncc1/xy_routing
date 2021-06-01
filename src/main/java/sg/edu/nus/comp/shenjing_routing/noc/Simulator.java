@@ -23,6 +23,7 @@ package sg.edu.nus.comp.shenjing_routing.noc;
 import javax.naming.SizeLimitExceededException;
 
 import sg.edu.nus.comp.shenjing_routing.utils.IOUtils;
+import sg.edu.nus.comp.shenjing_routing.utils.Pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,17 +31,28 @@ import java.util.List;
 
 public class Simulator {
     Network network;
+    public List<NodeInstruction>[][] totalInstructions;
+    int x_size, y_size;
     public Simulator(int x_size, int y_size, int bufferSize, int timeOut){
+        this.x_size=x_size;
+        this.y_size=y_size;
         network = new Network(x_size, y_size, bufferSize, timeOut);
+        totalInstructions = new List[x_size][y_size];
+        for (int i = 0; i < x_size; i++) {
+            for (int j = 0; j < y_size; j++) {
+                totalInstructions[i][j] = new ArrayList<NodeInstruction>();
+            }
+        }
     }
 
-    public String routeToString(String messageListString) throws SizeLimitExceededException {
+    public String routeToString(String messageListString, int cycle_offset) throws SizeLimitExceededException {
         String[] stringList = messageListString.split("\n");
         List<List<Message>> messageGroups = IOUtils.parseMessages(Arrays.asList(stringList));
         StringBuilder stringBuilder = new StringBuilder();
         for(List<Message> msgs : messageGroups){
-            network.route(msgs);
+            network.route(msgs, cycle_offset);
             List<NodeInstruction>[][] instrArr = network.getInstructions();
+            addToHistory(instrArr);
             for (int i = 0; i < network.x_size; i++) {
                 for (int j = 0; j < network.y_size; j++) {
                     for(NodeInstruction instr : instrArr[i][j])
@@ -53,14 +65,33 @@ public class Simulator {
         return stringBuilder.toString();
     }
 
-    public List<List<NodeInstruction>[][]> routeToInstructions(String messageListString) throws SizeLimitExceededException {
+    public List<List<NodeInstruction>[][]> routeToInstructions(String messageListString, int cycle_offset) throws SizeLimitExceededException {
         String[] stringList = messageListString.split("\n");
         List<List<Message>> messageGroups = IOUtils.parseMessages(Arrays.asList(stringList));
         List<List<NodeInstruction>[][]> instructions = new ArrayList<>();
         for(List<Message> msgs : messageGroups){
-            network.route(msgs);
-            instructions.add(network.getInstructions());
+            network.route(msgs, cycle_offset);
+            List<NodeInstruction>[][] instr = network.getInstructions();
+            instructions.add(instr);
+            addToHistory(instr);
         }
         return instructions;
+    }
+
+
+
+    public void clearHistory(){
+        for (int i = 0; i < x_size; i++) {
+            for (int j = 0; j < y_size; j++) {
+                totalInstructions[i][j].clear();
+            }
+        }
+    }
+    public void addToHistory(List<NodeInstruction>[][] instr){
+        for (int i = 0; i < x_size; i++) {
+            for (int j = 0; j < y_size; j++) {
+                totalInstructions[i][j].addAll(instr[i][j]);
+            }
+        }
     }
 }

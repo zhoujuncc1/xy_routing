@@ -29,6 +29,7 @@ import sg.edu.nus.comp.shenjing_routing.utils.Triple;
 public class Message {
     int id;
     Pair<Integer> src;
+    List<Pair<Integer>> dstList;
     Pair<Integer> dst;
 
     List<NodeInstruction> instructionTrace;
@@ -39,6 +40,16 @@ public class Message {
         this.id = id;
         this.src = src;
         this.dst = dst;
+        instructionTrace=new ArrayList<>();
+        nodeTrace=new ArrayList<>();
+        arrived=false;
+    }
+
+    public Message(int id, Pair<Integer> src, List<Pair<Integer>> dst) {
+        this.id = id;
+        this.src = src;
+        this.dstList = dst;
+        this.dst = dst.remove(0);
         instructionTrace=new ArrayList<>();
         nodeTrace=new ArrayList<>();
         arrived=false;

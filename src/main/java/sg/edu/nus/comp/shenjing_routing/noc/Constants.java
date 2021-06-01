@@ -33,5 +33,6 @@ public class Constants {
     public static final int INSTR_SEND = 0;
     public static final int INSTR_BYPASS = 1;
     public static final int INSTR_RECV = 2;
+    public static final int INSTR_FWD = 3;
 
 }

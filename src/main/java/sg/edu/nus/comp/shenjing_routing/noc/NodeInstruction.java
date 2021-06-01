@@ -56,9 +56,9 @@ public class NodeInstruction {
                 stringBuilder.append("BYPASS, ");
                 break;
         }
-        if (src_direction != -1)
+        //if (src_direction != -1)
             stringBuilder.append(src_direction).append(", ");
-        if (dst_direction != -1)
+        //if (dst_direction != -1)
             stringBuilder.append(dst_direction).append(", ");
         stringBuilder.append(message_id);
         return stringBuilder.toString();

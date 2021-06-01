@@ -46,14 +46,14 @@ public class Network {
             return single ? Constants.DIRECTION_LETTER[direction] : Constants.DIRECTION_WORD[direction];
     }
 
-    public final Node[][] nodes;
+    public Node[][] nodes;
 
-    private boolean[][] moved;
-    private List<Message> finished;
+    protected boolean[][] moved;
+    protected List<Message> finished;
 
-    public final int x_size;
-    public final int y_size;
-    public final int timeout;
+    public int x_size;
+    public int y_size;
+    public int timeout;
 
     public Network(int x_size, int y_size, int buffer_size, int timeout) {
         this.x_size = x_size;
@@ -94,7 +94,7 @@ public class Network {
      *
      * @param messages Assume all the messages have distinct sources
      */
-    public boolean route(List<Message> messages) throws SizeLimitExceededException {
+    public boolean route(List<Message> messages, int cycle_offset) throws SizeLimitExceededException {
         finished.clear();
         resetAllNodes();
         for (Message msg : messages) {
@@ -102,7 +102,7 @@ public class Network {
         }
         int i;
         for (i = 0; i < timeout && finished.size() < messages.size(); i++) {
-            routeStep(i);
+            routeStep(i+cycle_offset);
         }
         if (i == timeout)
             System.out.println("!!TIMEOUT!!");
@@ -124,23 +124,28 @@ public class Network {
     private void routeStep(int time) throws SizeLimitExceededException {
         Utils.fill(moved, false);
         boolean at_least_moved;
+        boolean forward = false;
         do {
             at_least_moved = false;
-
             for (int i = 0; i < x_size; i++) {
                 for (int j = 0; j < y_size; j++) {
+                    forward = false;
                     //Deal with arrived
                     if (!moved[i][j]) {
                         Message msg = nodes[i][j].arrive(time);
                         if (msg != null) {
-                            moved[i][j] = true;
-                            at_least_moved = true;
-                            finished.add(msg);
+                            if(msg.arrived){
+                                moved[i][j] = true;
+                                at_least_moved = true;
+                                finished.add(msg);
+                            } else {
+                                forward = true;
+                            }
                         }
                     }
                     //Route the message
                     if (!moved[i][j]) {
-                        int direction = nodes[i][j].route(time);
+                        int direction = nodes[i][j].route(time, forward);
                         if (direction != -1) {
                             moved[i][j] = true;
                             switch (direction) {

@@ -36,7 +36,7 @@ public class MNIST_MLP {
         Network network = new Network(4, 3);
         List<List<Message>> messageGroups = IOUtils.parseMessages(filename);
         for(List<Message> msgs : messageGroups){
-            network.route(msgs);
+            network.route(msgs,0);
             for(Message msg: msgs){
                 System.out.print(msg.toString()+": ");
                 System.out.println(msg.printNodeTrace());
